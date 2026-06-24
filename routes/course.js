@@ -14,7 +14,11 @@ res.json({
     message : "signup endpoint"
    })
 })
-
+courseRouter.post("/deleteCourse",(req,res)=>{
+    res.json({
+        message : "course deleted"
+    })
+})
 module.exports ={
    courseRouter: courseRouter
 }
