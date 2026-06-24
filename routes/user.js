@@ -3,8 +3,7 @@ const router = express.Router;
 
 const userRouter = router();
 
-
-    userRouter.post("/signup",(req,res)=>{
+  userRouter.post("/signup",(req,res)=>{
 res.json({
     message : "signup endpoint"
    })
