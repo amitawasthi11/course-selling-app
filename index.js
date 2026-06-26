@@ -4,15 +4,19 @@ require("dotenv").config();
  const {userRouter} = require("./routes/user");
 const {courseRouter} = require("./routes/course");
 const {adminRouter} =  require("./routes/admin");
-const app = express();
+const app = express()
+app.use(express.json());
+
+require("dotenv").config();
+
 
 app.use("/api/v1/user",userRouter);
-app.use("api/v1/admin",adminRouter)
+app.use("/api/v1/admin",adminRouter)
 app.use("/api/v1/course",courseRouter);
 
 
  async function main(){
- await mongoose.connect("mongodb+srv://amittt11:amittt11@cluster0.fpu30u7.mongodb.net/coursera-app")
+ await mongoose.connect(process.env.MONGO_URL);
 app.listen(3000);
  }
 
