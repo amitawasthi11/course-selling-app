@@ -1,11 +1,14 @@
 const express = require("express");
-const router = express.Router;
-const {adminModel} = require("../db");
+
+// const router = express.Router;
+const {adminmodel} = require("../db");
+// becrypt,jod,jsonwebtoken
 
 const adminRouter = express.Router();
 // adminRouter.use(adminMiddleware);
 
  adminRouter.post("/signup",(req,res)=>{
+    
 res.json({
     message : "signup endpoint"
    })

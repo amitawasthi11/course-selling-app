@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
  const {userRouter} = require("./routes/user");
 const {courseRouter} = require("./routes/course");
 const {adminRouter} =  require("./routes/admin");
@@ -15,4 +16,4 @@ app.use("/api/v1/course",courseRouter);
 app.listen(3000);
  }
 
- main()
+ main()  

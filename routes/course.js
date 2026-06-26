@@ -1,7 +1,8 @@
 const express = require("express");
-const router = express.Router;
-
-const courseRouter = router();
+// const router = express.Router;
+const {coursmodel} = require("../db");
+ 
+const courseRouter = express.Router();
 
 courseRouter.post("/purchase",(req,res)=>{
 res.json({
