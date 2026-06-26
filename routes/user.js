@@ -59,10 +59,10 @@ const signinSchema = z.object({
     password: z.string().min(6)
 });
 
+
+
 userRouter.post("/signin",async(req,res)=>{
-console.log("Body:", req.body);
-
-
+// console.log("Body:", req.body);
 try {
   const result = signinSchema.safeParse(req.body);
 
@@ -86,10 +86,16 @@ if (!result.success) {
   });
  }
 
+ const token = jwt.sign({
+  id: user._id
+ },process.env.JWT_SECRET)
+
+
  res.json({
-  message :"login successfully"
+  message :"login successfully",
+  token : token
  })
-  }catch(e){
+}catch(e){
    return res.status(500).json({
         message: e.message
     });
