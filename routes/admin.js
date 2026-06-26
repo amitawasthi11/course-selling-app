@@ -2,7 +2,8 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
-const {adminmodel} = require("../db");
+const {adminmodel, coursemodel} = require("../db");
+const {adminmiddleware} = require("../middleware/admin")
 
 
 const adminRouter = express.Router();
@@ -103,9 +104,15 @@ if (!result.success) {
   }
 })
 
-adminRouter.post("/course",(req,res)=>{
+adminRouter.post("/course",adminmiddleware,(req,res)=>{
+     const adminId = req.creatorId;
+     const {title,description,imageUrl,price} = req.body;
+    const course =  await coursemodel.create({
+        title,description,imageUrl,price,creatorId:adminId
+     })
     res.json({
-        message : "course created"
+        message : "course created",
+        courseId : course._id
     })
 })
 

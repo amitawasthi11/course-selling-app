@@ -10,7 +10,7 @@ if(decoded.role != admin){
         message : "access denied"
     })
 }
-req.adminId = decoded.id;
+req.creatorId = decoded.id;
 next();
 }catch(e){
     console.log("invalid token");
