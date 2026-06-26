@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
 const {adminmodel, coursemodel} = require("../db");
-const {adminmiddleware} = require("../middleware/admin")
+const { adminmiddleware } = require("../middleware/admin")
 
 
 const adminRouter = express.Router();
@@ -116,9 +116,22 @@ adminRouter.post("/course",adminmiddleware,async(req,res)=>{
     })
 })
 
-adminRouter.put("/course",(req,res)=>{
+adminRouter.put("/course",async(req,res)=>{
+    const adminId = req.creatorId;
+    const {title,description,imageUrl,price,courseId} = requestAnimationFrame.body;
+ 
+    const course = await coursemodel.updateOne({
+       _id : courseId
+    },{
+        title : title,
+        description : description,
+        imageUrl : imageUrl,
+        price : price
+    })
+
     res.json({
-        message : "course created"
+        message : "course updated",
+        courseId :course._Id 
     })
 })
 
