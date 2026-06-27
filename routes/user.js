@@ -2,8 +2,9 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
-const {usermodel} = require("../db");
+const {usermodel, purchasemodel, coursemodel} = require("../db");
 const admin = require("./admin");
+const { courseRouter } = require("./course");
 const userRouter = express.Router();
 
 const signupSchema = z.object({
@@ -103,10 +104,25 @@ if (!result.success) {
 })
 
 
-userRouter.get("/purchases",(req,res)=>{
+userRouter.get("/purchases",async(req,res)=>{
+  const userId = req.userId;
+  const courseId = req.body.courseId;
+  await purchasemodel.create({
+    userId,
+    courseId
+  })
 res.json({
-    message : "purchase"
+    message : "you have successfully bought the course"
    })
+})
+
+courseRouter.get("/preview",async(req,res)=>{
+  console.log("preview is hit");
+  
+const courses = await coursemodel.find({});
+res.json({
+  courses
+})
 })
 
 module.exports ={

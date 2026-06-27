@@ -150,11 +150,8 @@ adminRouter.get("/course/bulk",adminmiddleware,async(req,res)=>{
         price : price
     })
 
-   
-
-
     res.json({
-        message : "course created",
+        message : "course preview",
         courses 
     })
 })
@@ -164,3 +161,12 @@ adminRouter.get("/course/bulk",adminmiddleware,async(req,res)=>{
 module.exports = {
     adminRouter:adminRouter
 }
+
+
+// {
+//     "firstname": "garima",
+//   "lastname": "sharma",
+//   "email": "garima@gmail.com",
+//   "password": "12345678"
+
+// }

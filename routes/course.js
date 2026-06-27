@@ -1,6 +1,6 @@
 const express = require("express");
 // const router = express.Router;
-const {coursmodel} = require("../db");
+const {coursemodel} = require("../db");
  
 const courseRouter = express.Router();
 
@@ -10,9 +10,13 @@ res.json({
    })
 })
 
-courseRouter.get("/preview",(req,res)=>{
+courseRouter.get("/preview",async(req,res)=>{
+      console.log("preview is hit");
+      
+    const courses = await coursemodel.find({});
 res.json({
-    message : "signup endpoint"
+    message : "signup endpoint",
+    courses
    })
 })
 courseRouter.post("/deleteCourse",(req,res)=>{
