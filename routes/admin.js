@@ -105,7 +105,9 @@ if (!result.success) {
 })
 
 adminRouter.post("/course",adminmiddleware,async(req,res)=>{
-     const adminId = req.creatorId;
+  console.log("Course route hit");
+    console.log(req.body); 
+  const adminId = req.creatorId;
      const {title,description,imageUrl,price} = req.body;
     const course =  await coursemodel.create({
         title,description,imageUrl,price,creatorId:adminId

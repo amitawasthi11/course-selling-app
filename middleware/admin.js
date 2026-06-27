@@ -2,21 +2,34 @@ const jwt = require("jsonwebtoken");
 
 
 function adminmiddleware(req,res,next){
+    console.log(req.headers);
+    console.log("Middleware called");
 const token = req.headers.token;
-try{
-const decoded = jwt.verify(token,process.env.JWT_SECRET);
-if(decoded.role != admin){
-    return res.json({
-        message : "access denied"
+if(!token){
+    return res.status(401).json({
+        message : "token not provided"
     })
 }
-req.creatorId = decoded.id;
+try{
+const decoded = jwt.verify(token,process.env.JWT_SECRET);
+req.createrID = decoded.id;
 next();
-}catch(e){
-    console.log("invalid token");
-    
+// if(decoded.role != admin){
+//     return res.json({
+//         message : "access denied"
+//     })
+// }
+// req.creatorId = decoded.id;
+// next();
+
+}catch (e) {
+    return res.status(401).json({
+        message: e.message
+    });
 }
 }
 module.exports ={
  adminmiddleware : adminmiddleware
 }
+
+
